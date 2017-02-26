@@ -39,7 +39,7 @@ public class ProductRestController {
 	}
 	
 	@RequestMapping(value = "/apiv0/", method = RequestMethod.PUT)
-	public Product putActivity(@RequestBody Product product) {
+	public Product putProduct(@RequestBody Product product) {
 		return (new ProductSaveCommand()).
 			setApiProduct(product).
 			execute();

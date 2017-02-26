@@ -15,10 +15,10 @@ public class ActiveEmployeeCountsQuery implements ResultCommandInterface<ActiveE
 				this.employeeRepository.activeCountByClassification(EmployeeClassification.CASHIER)
 			).
 			setActiveShiftManagerCount(
-				this.employeeRepository.activeCountByClassification(EmployeeClassification.CASHIER)
+				this.employeeRepository.activeCountByClassification(EmployeeClassification.SHIFT_MANAGER)
 			).
 			setActiveGeneralManagerCount(
-				this.employeeRepository.activeCountByClassification(EmployeeClassification.CASHIER)
+				this.employeeRepository.activeCountByClassification(EmployeeClassification.GENERAL_MANAGER)
 			);
 	}
 	

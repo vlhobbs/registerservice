@@ -31,6 +31,12 @@ public class ProductEntity extends BaseEntity<ProductEntity> {
 		return record;
 	}
 
+	private int cost;
+	public int getCost()
+	{
+		return cost; 
+	}
+	
 	private String lookupCode;
 	public String getLookupCode() {
 		return this.lookupCode;

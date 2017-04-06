@@ -1,16 +1,45 @@
 package edu.uark.models.entities;
 import java.util.ArrayList;
-public Class ShoppingCart
+import edu.uark.models.entities.ProductEntity;
+public class ShoppingCart
 {
-	ArrayList cart;
+	ArrayList<ProductEntity> cart;
 	int count;
 	int totalPrice; 
+	
 	ShoppingCart()
 	{
 	  cart = new ArrayList();
 	  count = 0;
 	  totalPrice = 0;
 	}
+	 
+	public void add(ProductEntity input, int quantity)
+	{
+		cart.add(input);
+		count += quantity;
+		totalPrice += (quantity * input.getCost());
+	}
 	
-
+	public void remove(ProductEntity input, int quantity)
+	{
+		cart.remove(input);
+		count -= quantity; 
+		totalPrice -= (quantity * input.getCost()); 
+	}
+	
+	public int getTotalPrice()
+	{
+		return totalPrice;
+	}
+	
+	public int getCount()
+	{
+		return count; 
+	}
+	
+	public ArrayList<ProductEntity> getList()
+	{
+		return cart;
+	}
 }

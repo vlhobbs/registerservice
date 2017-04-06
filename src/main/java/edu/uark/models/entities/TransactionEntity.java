@@ -32,7 +32,7 @@ public class TransactionEntity extends BaseEntity<TransactionEntity> {
 	@Override
 	protected Map<String, Object> fillRecord(Map<String, Object> record) {
 		record.put(TransactionFieldNames.RECORDID, this.recordId);
-		record.put(TransactionFieldNames.CASHIERID, this.cashierID);
+		record.put(TransactionFieldNames.CASHIERID, this.cashierId);
                 record.put(TransactionFieldNames.TOTAL, this.total);
                 record.put(TransactionFieldNames.TRANSTYPE, this.transType);
                 record.put(TransactionFieldNames.REFID, this.referenceId);
@@ -69,7 +69,8 @@ public class TransactionEntity extends BaseEntity<TransactionEntity> {
 	private float total;
 	public float getTotal(){
 		return this.total;	
-
+	} 
+	
 	public TransactionEntity setTotal(float total){
 		if (this.total != total) {
 			this.total = total;
@@ -84,7 +85,7 @@ public class TransactionEntity extends BaseEntity<TransactionEntity> {
 	}
 
 	public TransactionEntity setTransType(String transType){
-		if (!StringUtils.equal(this.transType, transType)) {
+		if (!StringUtils.equals(this.transType, transType)) {
 			this.transType = transType;
 			this.propertyChanged(TransactionFieldNames.TRANSTYPE);
 		}
@@ -97,7 +98,7 @@ public class TransactionEntity extends BaseEntity<TransactionEntity> {
 	}
 
 	public TransactionEntity setReferenceId(String referenceId) {
-		if (!StringUtils.equal(this.referenceId, referenceId)) {
+		if (!StringUtils.equals(this.referenceId, referenceId)) {
 			this.referenceId = referenceId;
 			this.propertyChanged(TransactionFieldNames.REFID);
 		}

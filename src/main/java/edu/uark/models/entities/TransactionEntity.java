@@ -131,7 +131,6 @@ public class TransactionEntity extends BaseEntity<TransactionEntity> {
 		return apiTransaction;
 	}
 
-/*
 
 	public TransactionEntity() {
 		super(new TransactionRepository());

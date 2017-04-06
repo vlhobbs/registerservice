@@ -11,9 +11,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import edu.uark.dataaccess.entities.BaseEntity;
 //UPDATE VERSIONS OF ALL BELOW
-//import edu.uark.models.api.Product;
+//import edu.uark.models.api.Transaction;
 import edu.uark.models.entities.fieldnames.TransactionFieldNames;
-//import edu.uark.models.repositories.ProductRepository;
+//import edu.uark.models.repositories.TransactionRepository;
 
 //NOTES: uuid = getString. money = not sure, probably float. enum: Not sure? 
 
@@ -112,45 +112,59 @@ public class TransactionEntity extends BaseEntity<TransactionEntity> {
 	}
 
 	 
-/*
-	
 	//This is getting into the api stuff, am going to need to update it.
 
 
 	}
 	
-	public Product synchronize(Product apiProduct) {
-		this.setCount(apiProduct.getCount());
-		this.setLookupCode(apiProduct.getLookupCode());
+	public Transaction synchronize(Transaction apiTransaction) {
+		this.setRecordId(apiTransaction.getRecordId());
+		this.setCashierId(apiTransaction.getCashierId());
+		this.setFloat(apiTransaction.getFloat());
+		this.setTotal(apiTransaction.getTotal());
+		this.setTransType(apiTransaction.getTransType());
+		this.setReferenceId(apiTransaction.getReferenceId());
+		this.setCreatedOn(apiTransaction.getCreatedOn());		
 		
-		apiProduct.setCreatedOn(this.createdOn);
+		apiTransaction.setCreatedOn(this.createdOn);
 		
-		return apiProduct;
-	}
-	
-	public ProductEntity() {
-		super(new ProductRepository());
-		
-		this.count = -1;
-		this.lookupCode = StringUtils.EMPTY;
-		this.createdOn = LocalDateTime.now();
-	}
-	
-	public ProductEntity(UUID id) {
-		super(id, new ProductRepository());
-		
-		this.count = -1;
-		this.lookupCode = StringUtils.EMPTY;
-		this.createdOn = LocalDateTime.now();
+		return apiTransaction;
 	}
 
-	public ProductEntity(Product apiProduct) {
-		super(apiProduct.getId(), new ProductRepository());
-		
-		this.count = apiProduct.getCount();
-		this.lookupCode = apiProduct.getLookupCode();
+/*
 
-		this.createdOn = LocalDateTime.now();
+	public TransactionEntity() {
+		super(new TransactionRepository());
+		
+		this.recordId = StringUtils.EMPTY;
+		this.cashierId = StringUtils.EMPTY;
+		this.total = 0.00;
+		this.transType = StringUtil.EMPTY;
+		this.referenceId = StringUtils.EMPTY;
+		this.createdOn=LocalDateTime.now();
 	}
-*/
+
+	public TransactionEntity(Transaction apiTransaction){
+		super(apiTransaction.getRecordId(), new TransactionRepository());
+
+		this.recordId = apiTransaction.getRecordId();
+		this.cashierId = apiTransaction.getCashierId();
+		this.total = apiTransaction.getTotal();
+		this.transType = apiTransaction.getTransType();
+		this.referenceId = apiTransaction.getReferenceId();
+		this.createdOn=apiTransaction.getCreatedOn(); 
+	}	
+	
+	public TransactionEntity(UUID recordId){
+		super(recordId, new TransactionRepository());
+		
+		this.recordId = StringUtils.EMPTY;
+		this.cashierId = StringUtils.EMPTY;
+		this.total = 0.00;
+		this.transType = StringUtil.EMPTY;
+		this.referenceId = StringUtils.EMPTY;
+		this.createdOn=LocalDateTime.now();
+	}
+
+
 }

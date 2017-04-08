@@ -11,7 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import edu.uark.dataaccess.entities.BaseEntity;
 //UPDATE VERSIONS OF ALL BELOW
-//import edu.uark.models.api.Transaction;
+import edu.uark.models.api.Transaction;
 import edu.uark.models.entities.fieldnames.TransactionFieldNames;
 //import edu.uark.models.repositories.TransactionRepository;
 

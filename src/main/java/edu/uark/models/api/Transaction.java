@@ -5,10 +5,8 @@ import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
 
-//commented out means they aren't done
-//import edu.uark.models.api.enums.TransactionApiRequestStatus;
-//import edu.uark.models.entities.TransactionEntity;
-//Above is nearly done, but I need this first
+import edu.uark.models.api.enums.TransactionApiRequestStatus;
+import edu.uark.models.entities.TransactionEntity;
 
 public class Transaction {
 	

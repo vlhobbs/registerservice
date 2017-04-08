@@ -16,17 +16,17 @@ import edu.uark.models.entities.fieldnames.TransactionFieldNames;
 
 public class TransactionRepository extends BaseRepository<TransactionEntity> implements TransactionRepositoryInterface {
 	@Override
-	public boolean TransactionIdExists(String transactionId) {
+	public boolean TransactionIdExists(String recordId) {
 		return this.existsWhere(
 			new WhereContainer(
 				(new WhereClause()).
 					table(this.primaryTable).
-					fieldName(TransactionFieldNames.EMPLOYEE_ID).
+					fieldName(TransactionFieldNames.RECORD_ID).
 					comparison(SQLComparisonType.EQUALS)
 			),
 			(ps) -> {
 				try {
-					ps.setObject(1, transactionId);
+					ps.setObject(1, recordId);
 				} catch (SQLException e) {}
 
 				return ps;
@@ -35,17 +35,17 @@ public class TransactionRepository extends BaseRepository<TransactionEntity> imp
 	}
 	
 	@Override
-	public EmployeeEntity byEmployeeId(String employeeId) {
+	public TransactionEntity byTransactionId(String recordId) {
 		return this.firstOrDefaultWhere(
 			new WhereContainer(
 				(new WhereClause()).
 					table(this.primaryTable).
-					fieldName(EmployeeFieldNames.EMPLOYEE_ID).
+					fieldName(TransactionFieldNames.RECORD_ID).
 					comparison(SQLComparisonType.EQUALS)
 			),
 			(ps) -> {
 				try {
-					ps.setObject(1, employeeId);
+					ps.setObject(1, recordId);
 				} catch (SQLException e) {}
 
 				return ps;
@@ -54,18 +54,18 @@ public class TransactionRepository extends BaseRepository<TransactionEntity> imp
 	}
 	
 	@Override
-	public int activeCountByClassification(EmployeeClassification employeeClassification) {
+	public int activeCountByTransactionType(TransType transType) {
 		return this.countWhere(
 			new WhereContainer(
 				(new WhereClause()).
 					table(this.primaryTable).
-					fieldName(EmployeeFieldNames.CLASSIFICATION).
+					fieldName(EmployeeFieldNames.TRANS_TYPE).
 					comparison(SQLComparisonType.EQUALS)
 			).addWhereClause(
 				(new WhereClause()).
 					conditional(SQLConditionalType.AND).
 					table(this.primaryTable).
-					fieldName(EmployeeFieldNames.ACTIVE).
+					fieldName(TransactionFieldNames.TRANS_TYPE).
 					comparison(SQLComparisonType.EQUALS)
 			),
 			(ps) -> {
@@ -80,11 +80,13 @@ public class TransactionRepository extends BaseRepository<TransactionEntity> imp
 	}
 	
 	@Override
-	public EmployeeEntity createOne() {
-		return new EmployeeEntity();
+	public TransactionEntity createOne() {
+		return new TransactionEntity();
 	}
 	
-	public EmployeeRepository() {
-		super(DatabaseTable.EMPLOYEE);
-	}
+//	public TransactionRepository() {
+//		super(DatabaseTable.TRANSACTION);
+//	}
+//Need to look @ DatabaseTable
+
 }

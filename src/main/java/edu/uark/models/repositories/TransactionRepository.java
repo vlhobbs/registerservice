@@ -34,7 +34,7 @@ public class TransactionRepository extends BaseRepository<TransactionEntity> imp
 		);
 	}
 	
-	@Override
+/*	@Override
 	public EmployeeEntity byEmployeeId(String employeeId) {
 		return this.firstOrDefaultWhere(
 			new WhereContainer(
@@ -87,4 +87,5 @@ public class TransactionRepository extends BaseRepository<TransactionEntity> imp
 	public EmployeeRepository() {
 		super(DatabaseTable.EMPLOYEE);
 	}
+	*/
 }

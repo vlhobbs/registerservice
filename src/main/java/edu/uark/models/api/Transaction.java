@@ -10,12 +10,12 @@ import edu.uark.models.entities.TransactionEntity;
 
 public class Transaction {
 	
-	private UUID recordId;
-	public UUID getRecordId() {
-		return this.recordId;
+	private UUID id;
+	public UUID getId() {
+		return this.id;
 	}
-	public Transaction setRecordId(UUID recordId) {
-		this.recordId=recordId;
+	public Transaction setRecordId(UUID id) {
+		this.id = id;
 		return this;
 	}
 
@@ -87,7 +87,7 @@ public class Transaction {
 
 
 	public Transaction() {
-		this.recordId = new UUID(0,0);
+		this.id = new UUID(0,0);
 		this.cashierId = new UUID(0,0);
 		this.total = 0.00;
 		this.transType="sale";
@@ -98,7 +98,7 @@ public class Transaction {
 	}
 
 	public Transaction(TransactionEntity transactionEntity){
-		this.recordId=transactionEntity.getRecordId();
+		this.id=transactionEntity.getRecordId();
 		this.cashierId=transactionEntity.getCashierId() ;
 		this.total=transactionEntity.getTotal();
 		this.transType=transactionEntity.getTransType();
@@ -111,4 +111,3 @@ public class Transaction {
 
 
 }
-	

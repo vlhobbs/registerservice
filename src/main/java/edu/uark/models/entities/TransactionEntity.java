@@ -13,14 +13,12 @@ import edu.uark.dataaccess.entities.BaseEntity;
 //UPDATE VERSIONS OF ALL BELOW
 import edu.uark.models.api.Transaction;
 import edu.uark.models.entities.fieldnames.TransactionFieldNames;
-//import edu.uark.models.repositories.TransactionRepository;
-
-//NOTES: uuid = getString. money = not sure, probably float. enum: Not sure? 
+import edu.uark.models.repositories.TransactionRepository;
 
 public class TransactionEntity extends BaseEntity<TransactionEntity> {
 	@Override
 	protected void fillFromRecord(ResultSet rs) throws SQLException {
-		this.recordId = rs.getString(TransactionFieldNames.RECORDID); 
+		this.id = rs.getString(TransactionFieldNames.ID); 
 		this.cashierId = rs.getString(TransactionFieldNames.CASHIERID);
                 this.total = rs.getFloat(TransactionFieldNames.TOTAL);
                 this.transType = rs.getString(TransactionFieldNames.TRANSTYPE);
@@ -31,7 +29,7 @@ public class TransactionEntity extends BaseEntity<TransactionEntity> {
 
 	@Override
 	protected Map<String, Object> fillRecord(Map<String, Object> record) {
-		record.put(TransactionFieldNames.RECORDID, this.recordId);
+		record.put(TransactionFieldNames.ID, this.id);
 		record.put(TransactionFieldNames.CASHIERID, this.cashierId);
                 record.put(TransactionFieldNames.TOTAL, this.total);
                 record.put(TransactionFieldNames.TRANSTYPE, this.transType);
@@ -41,13 +39,13 @@ public class TransactionEntity extends BaseEntity<TransactionEntity> {
 		return record;
 	}
 
-	private String recordId;
-	public String getRecordId() {
-		return this.recordId;
+	private String id;
+	public String getId() {
+		return this.id;
 	}
-	public TransactionEntity setRecordId(String recordId) {
-		if (!StringUtils.equals(this.recordId, recordId)) {
-			this.recordId = recordId;
+	public TransactionEntity setRecordId(String id) {
+		if (!StringUtils.equals(this.id, id)) {
+			this.id = id;
 			this.propertyChanged(TransactionFieldNames.LOOKUP_CODE);
 		}
 		
@@ -118,7 +116,7 @@ public class TransactionEntity extends BaseEntity<TransactionEntity> {
 	}
 	
 	public Transaction synchronize(Transaction apiTransaction) {
-		this.setRecordId(apiTransaction.getRecordId());
+		this.setId(apiTransaction.getId());
 		this.setCashierId(apiTransaction.getCashierId());
 		this.setFloat(apiTransaction.getFloat());
 		this.setTotal(apiTransaction.getTotal());
@@ -135,7 +133,7 @@ public class TransactionEntity extends BaseEntity<TransactionEntity> {
 	public TransactionEntity() {
 		super(new TransactionRepository());
 		
-		this.recordId = StringUtils.EMPTY;
+		this.id = StringUtils.EMPTY;
 		this.cashierId = StringUtils.EMPTY;
 		this.total = 0.00;
 		this.transType = StringUtil.EMPTY;
@@ -146,7 +144,7 @@ public class TransactionEntity extends BaseEntity<TransactionEntity> {
 	public TransactionEntity(Transaction apiTransaction){
 		super(apiTransaction.getRecordId(), new TransactionRepository());
 
-		this.recordId = apiTransaction.getRecordId();
+		this.id = apiTransaction.getId();
 		this.cashierId = apiTransaction.getCashierId();
 		this.total = apiTransaction.getTotal();
 		this.transType = apiTransaction.getTransType();
@@ -157,7 +155,7 @@ public class TransactionEntity extends BaseEntity<TransactionEntity> {
 	public TransactionEntity(UUID recordId){
 		super(recordId, new TransactionRepository());
 		
-		this.recordId = StringUtils.EMPTY;
+		this.id = StringUtils.EMPTY;
 		this.cashierId = StringUtils.EMPTY;
 		this.total = 0.00;
 		this.transType = StringUtil.EMPTY;

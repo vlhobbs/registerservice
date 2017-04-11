@@ -10,8 +10,7 @@ import edu.uark.dataaccess.repository.helpers.where.WhereClause;
 import edu.uark.dataaccess.repository.helpers.where.WhereContainer;
 import edu.uark.models.entities.TransactionEntity;
 import edu.uark.models.entities.fieldnames.TransactionFieldNames;
-//Update these, make sure I need them.
-//import edu.uark.models.enums.TransactionClassification;
+import edu.uark.models.enums.TransactionClassification;
 import edu.uark.models.repositories.interfaces.TransactionRepositoryInterface;
 
 public class TransactionRepository extends BaseRepository<TransactionEntity> implements TransactionRepositoryInterface {

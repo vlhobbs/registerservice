@@ -2,8 +2,10 @@ package edu.uark.models.api;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
+//import java.math.BigDecimal; //(If rounding becomes an issue....)
 
 import org.apache.commons.lang3.StringUtils;
+
 
 import edu.uark.models.api.enums.ProductApiRequestStatus;
 import edu.uark.models.entities.ProductEntity;
@@ -27,15 +29,34 @@ public class Product {
 		return this;
 	}
 	
-	private int count;
-	public int getCount() {
-		return this.count;
+	private int quantity;
+	public int getQuantity() {
+		return this.quantity;
 	}
-	public Product setCount(int count) {
-		this.count = count;
+	public Product setQuantity(int quantity) {
+		this.quantity = quantity;
 		return this;
 	}
 	
+	private boolean salable;
+	public boolean getSalable() {
+		return this.salable;
+	}
+
+	public Product setSalable(boolean salable) {
+		this.salable = salable;
+		return this;
+
+	private float price;
+	public float getPrice(){
+		return this.price;
+	}
+
+	public Product setPrice(float price){
+		this.price = price;
+		return this;
+	}	
+
 	private LocalDateTime createdOn;
 	public LocalDateTime getCreatedOn() {
 		return this.createdOn;
@@ -69,10 +90,29 @@ public class Product {
 		return this;
 	}
 	
-	public Product() {
-		this.count = -1;
+	public boolean isSameProduct(Product product2){
+		if 
+		(this.quantity == product2.quantity &&
+		StringUtils.equalsIgnoreCase(this.lookupCode, product2.lookupCode) &&
+		StringUtils.equalsIgnoreCase(this.id, product2.id) &&
+		this.salable == product2.salable &&
+		this.price == product2.price &&
+		this.createdOn.equals(product2.createdOn) &&
+		StringUtils.equalsIgnoreCase(this.apiRequestMessage, product2.apiRequestMessage) &&
+		this.apiRequestStatus == product2.apiRequestStatus) {
+			return true;
+		}
+		else {
+			return false;
+		}
+			 
+	
+	public Product() {		
+		this.quantity = -1;
 		this.lookupCode = "";
 		this.id = new UUID(0, 0);
+		this.salable = FALSE;
+		this.price = 0.00;
 		this.createdOn = LocalDateTime.now();
 		this.apiRequestMessage = StringUtils.EMPTY;
 		this.apiRequestStatus = ProductApiRequestStatus.OK;
@@ -80,10 +120,11 @@ public class Product {
 	
 	public Product(ProductEntity productEntity) {
 		this.id = productEntity.getId();
-		this.count = productEntity.getCount();
+		this.quantity = productEntity.getCount();
 		this.createdOn = productEntity.getCreatedOn();
 		this.lookupCode = productEntity.getLookupCode();
-
+		this.price = productEntity.getPrice();
+		this.salable = productEntity.getSalable();
 		this.apiRequestMessage = StringUtils.EMPTY;
 		this.apiRequestStatus = ProductApiRequestStatus.OK;
 	}

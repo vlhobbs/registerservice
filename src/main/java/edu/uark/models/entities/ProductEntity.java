@@ -18,23 +18,27 @@ public class ProductEntity extends BaseEntity<ProductEntity> {
 	@Override
 	protected void fillFromRecord(ResultSet rs) throws SQLException {
 		this.lookupCode = rs.getString(ProductFieldNames.LOOKUP_CODE);
-		this.count = rs.getInt(ProductFieldNames.COUNT);
+		this.quantity = rs.getInt(ProductFieldNames.QUANTITY);
 		this.createdOn = rs.getTimestamp(ProductFieldNames.CREATED_ON).toLocalDateTime();
+		this.salable = rs.getBoolean(ProductFieldNames.SALABLE);
+		this.price = rs.getFloat(ProductFieldNames.PRICE);
 	}
 
 	@Override
 	protected Map<String, Object> fillRecord(Map<String, Object> record) {
 		record.put(ProductFieldNames.LOOKUP_CODE, this.lookupCode);
-		record.put(ProductFieldNames.COUNT, this.count);
+		record.put(ProductFieldNames.QUANTITY, this.quantity);
 		record.put(ProductFieldNames.CREATED_ON, Timestamp.valueOf(this.createdOn));
+		record.put(ProductFieldNames.SALABLE, this.salable);
+		record.put(ProductFieldNames.PRICE, this.price);
 		
 		return record;
 	}
 
-	private int cost;
-	public int getCost()
+	private float price;
+	public float getPrice()
 	{
-		return cost; 
+		return price; 
 	}
 	
 	private String lookupCode;
@@ -50,14 +54,14 @@ public class ProductEntity extends BaseEntity<ProductEntity> {
 		return this;
 	}
 
-	private int count;
-	public int getCount() {
-		return this.count;
+	private int quantity;
+	public int getQuantity() {
+		return this.quantity;
 	}
-	public ProductEntity setCount(int count) {
-		if (this.count != count) {
-			this.count = count;
-			this.propertyChanged(ProductFieldNames.COUNT);
+	public ProductEntity setQuantity(int quantity) {
+		if (this.quantity != quantity) {
+			this.quantity = quantity;
+			this.propertyChanged(ProductFieldNames.QUANTITY);
 		}
 		
 		return this;
@@ -67,11 +71,36 @@ public class ProductEntity extends BaseEntity<ProductEntity> {
 	public LocalDateTime getCreatedOn() {
 		return this.createdOn;
 	}
-	
+
+	private float price;
+	public float getPrice() {
+		return this.price; //logic to round to 2 decimal places?)
+	}
+
+	private ProductEntity setPrice(float price){
+		if (this.price != price){
+			this.price = price;
+			this.propertyChanged(ProductFieldNames.PRICE);	
+		}
+		return this;
+	}
+
+	private boolean salable;
+	public boolean getSalable() {
+		return this.salable;
+	}
+
+	public ProductEntity setSalable(boolean salable){
+		if (this.salable != salable){
+			this.salable = salable;
+			this.propertyChanged(ProductFieldNames.SALABLE);
+		}
+		return this;
+
 	public Product synchronize(Product apiProduct) {
-		this.setCount(apiProduct.getCount());
+		this.setQuantity(apiProduct.getQuantity());
 		this.setLookupCode(apiProduct.getLookupCode());
-		
+		this.set
 		apiProduct.setCreatedOn(this.createdOn);
 		
 		return apiProduct;
@@ -80,25 +109,30 @@ public class ProductEntity extends BaseEntity<ProductEntity> {
 	public ProductEntity() {
 		super(new ProductRepository());
 		
-		this.count = -1;
+		this.quantity = -1;
 		this.lookupCode = StringUtils.EMPTY;
 		this.createdOn = LocalDateTime.now();
+		this.price = 0.00;
+		this.salable = false;
 	}
 	
 	public ProductEntity(UUID id) {
 		super(id, new ProductRepository());
 		
-		this.count = -1;
+		this.quantity = -1;
 		this.lookupCode = StringUtils.EMPTY;
 		this.createdOn = LocalDateTime.now();
+		this.price = 0.00;
+		this.salable = false;
 	}
 
 	public ProductEntity(Product apiProduct) {
 		super(apiProduct.getId(), new ProductRepository());
 		
-		this.count = apiProduct.getCount();
+		this.quantity = apiProduct.getQuantity();
 		this.lookupCode = apiProduct.getLookupCode();
-
+		this.price = apiProduct.getPrice();
+		this.salable = apiProduct.getSalable();
 		this.createdOn = LocalDateTime.now();
 	}
 }

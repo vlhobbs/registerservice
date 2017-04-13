@@ -10,10 +10,13 @@ import java.util.UUID;
 import org.apache.commons.lang3.StringUtils;
 
 import edu.uark.dataaccess.entities.BaseEntity;
-//UPDATE VERSIONS OF ALL BELOW
 import edu.uark.models.api.Transaction;
 import edu.uark.models.entities.fieldnames.TransactionFieldNames;
 import edu.uark.models.repositories.TransactionRepository;
+import edu.uark.models.api.enums.ProductApiRequestStatus;
+import edu.uark.models.entities.ProductEntity;
+import edu.uark.models.api.Product.java
+import edu.uark.models.api.ProductListing.java
 
 public class TransactionEntity extends BaseEntity<TransactionEntity> {
 	@Override
@@ -24,6 +27,8 @@ public class TransactionEntity extends BaseEntity<TransactionEntity> {
                 this.transType = rs.getString(TransactionFieldNames.TRANSTYPE);
                 this.referenceId = rs.getString(REFID); 
 		this.createdOn = rs.getTimestamp(TransactionFieldNames.CREATED_ON).toLocalDateTime();
+		//figure out how to get products later...
+		//this.products = new ProductListing();
                 
 	}
 
@@ -35,7 +40,7 @@ public class TransactionEntity extends BaseEntity<TransactionEntity> {
                 record.put(TransactionFieldNames.TRANSTYPE, this.transType);
                 record.put(TransactionFieldNames.REFID, this.referenceId);
                 record.put(TransactionFieldNames.CREATED_ON, Timestamp.valueOf(this.createdOn));
-		
+		//Again figure out product list
 		return record;
 	}
 
@@ -108,8 +113,20 @@ public class TransactionEntity extends BaseEntity<TransactionEntity> {
 	public LocalDateTime getCreatedOn() {
 		return this.createdOn;
 	}
-
-	 
+	
+	private ProductListing products;
+	public ProductListing getProducts(){
+		return this.products;
+		
+	}
+	
+	public TransactionEntity setProducts(ProductListing products){
+	//good idea to check equality once I have code to support
+	//if (!(this.products.compareListings(products){
+		this.products = products;
+		return this;
+		//}	
+	}
 	//This is getting into the api stuff, am going to need to update it.
 
 
@@ -123,7 +140,7 @@ public class TransactionEntity extends BaseEntity<TransactionEntity> {
 		this.setTransType(apiTransaction.getTransType());
 		this.setReferenceId(apiTransaction.getReferenceId());
 		this.setCreatedOn(apiTransaction.getCreatedOn());		
-		
+		//this.setProducts(apiTransaction.getProducts) //also needs adding
 		apiTransaction.setCreatedOn(this.createdOn);
 		
 		return apiTransaction;
@@ -139,6 +156,7 @@ public class TransactionEntity extends BaseEntity<TransactionEntity> {
 		this.transType = StringUtil.EMPTY;
 		this.referenceId = StringUtils.EMPTY;
 		this.createdOn=LocalDateTime.now();
+		this.products=new ProductListing();
 	}
 
 	public TransactionEntity(Transaction apiTransaction){
@@ -150,6 +168,7 @@ public class TransactionEntity extends BaseEntity<TransactionEntity> {
 		this.transType = apiTransaction.getTransType();
 		this.referenceId = apiTransaction.getReferenceId();
 		this.createdOn=apiTransaction.getCreatedOn(); 
+		this.products=new ProductListing();
 	}	
 	
 	public TransactionEntity(UUID recordId){
@@ -161,6 +180,7 @@ public class TransactionEntity extends BaseEntity<TransactionEntity> {
 		this.transType = StringUtil.EMPTY;
 		this.referenceId = StringUtils.EMPTY;
 		this.createdOn=LocalDateTime.now();
+		this.products=new ProductListing();
 	}
 
 

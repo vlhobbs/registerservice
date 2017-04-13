@@ -7,12 +7,15 @@ public class ShoppingCart
 	int count;
 	int totalPrice; 
 	
-	ShoppingCart()
+	public ShoppingCart()
 	{
 	  cart = new ArrayList();
 	  count = 0;
 	  totalPrice = 0;
 	}
+
+	public ShoppingCart(TransactionEntity transaction){
+			
 	 
 	public void add(ProductEntity input, int quantity)
 	{

@@ -46,9 +46,10 @@ public class Product {
 	public Product setSalable(boolean salable) {
 		this.salable = salable;
 		return this;
+	}
 
-	private float price;
-	public float getPrice(){
+	private double price;
+	public double getPrice(){
 		return this.price;
 	}
 
@@ -94,7 +95,7 @@ public class Product {
 		if 
 		(this.quantity == product2.quantity &&
 		StringUtils.equalsIgnoreCase(this.lookupCode, product2.lookupCode) &&
-		StringUtils.equalsIgnoreCase(this.id, product2.id) &&
+		this.id.equals(product2.id) &&
 		this.salable == product2.salable &&
 		this.price == product2.price &&
 		this.createdOn.equals(product2.createdOn) &&
@@ -105,13 +106,14 @@ public class Product {
 		else {
 			return false;
 		}
+	}
 			 
 	
 	public Product() {		
 		this.quantity = -1;
 		this.lookupCode = "";
 		this.id = new UUID(0, 0);
-		this.salable = FALSE;
+		this.salable = false;
 		this.price = 0.00;
 		this.createdOn = LocalDateTime.now();
 		this.apiRequestMessage = StringUtils.EMPTY;
@@ -120,7 +122,7 @@ public class Product {
 	
 	public Product(ProductEntity productEntity) {
 		this.id = productEntity.getId();
-		this.quantity = productEntity.getCount();
+		this.quantity = productEntity.getQuantity();
 		this.createdOn = productEntity.getCreatedOn();
 		this.lookupCode = productEntity.getLookupCode();
 		this.price = productEntity.getPrice();

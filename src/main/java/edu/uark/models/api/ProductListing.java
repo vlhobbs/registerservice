@@ -19,17 +19,16 @@ public class ProductListing {
 		return this;
 	}
 
-	public ProductListing countProducts (List<Product> products){
-		return this.size();
+	public int getSize(){
+		return this.products.size();
 	}
-
 	public boolean compareListings(ProductListing list2){
-		if (this.size() != list2.size()){  
+		if (this.getSize() != list2.getSize()){  
 			return false; //obv. not equal if they have different # of items
 		}
 		else { //at this point they might be the same
-			for (int i = 0; i < this.size(); i++){ //for each item in the list
-				if (!(this.get(i).isSameProduct(list2.get(i)))){ //if they not the same
+			for (int i = 0; i < this.getSize(); i++){ //for each item in the list
+				if (!(this.products.get(i).isSameProduct(list2.products.get(i)))){ //if they are not the same
 					return false; //end the loop
 				}
 			}

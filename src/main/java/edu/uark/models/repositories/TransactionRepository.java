@@ -10,7 +10,7 @@ import edu.uark.dataaccess.repository.helpers.where.WhereClause;
 import edu.uark.dataaccess.repository.helpers.where.WhereContainer;
 import edu.uark.models.entities.TransactionEntity;
 import edu.uark.models.entities.fieldnames.TransactionFieldNames;
-import edu.uark.models.enums.TransactionClassification;
+import edu.uark.models.enums.TransactionTypeClassification;
 import edu.uark.models.repositories.interfaces.TransactionRepositoryInterface;
 
 public class TransactionRepository extends BaseRepository<TransactionEntity> implements TransactionRepositoryInterface {
@@ -20,7 +20,7 @@ public class TransactionRepository extends BaseRepository<TransactionEntity> imp
 			new WhereContainer(
 				(new WhereClause()).
 					table(this.primaryTable).
-					fieldName(TransactionFieldNames.EMPLOYEE_ID).
+					fieldName(TransactionFieldNames.CASHIERID).
 					comparison(SQLComparisonType.EQUALS)
 			),
 			(ps) -> {
@@ -41,7 +41,7 @@ public class TransactionRepository extends BaseRepository<TransactionEntity> imp
 			new WhereContainer(
 				(new WhereClause()).
 					table(this.primaryTable).
-					fieldName(TransactionFieldNames.RECORD_ID).
+					fieldName(TransactionFieldNames.REFID).
 					comparison(SQLComparisonType.EQUALS)
 			),
 			(ps) -> {
@@ -91,6 +91,6 @@ Also need to edit TransactionRepositoryInterface and add them there.
 	}
 	
 	public TransactionRepository() {
-		super(DatabaseTable.Transaction);
+		super(DatabaseTable.TRANSACTION);
 	}
 }

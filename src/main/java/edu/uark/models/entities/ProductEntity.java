@@ -35,9 +35,8 @@ public class ProductEntity extends BaseEntity<ProductEntity> {
 		return record;
 	}
 
-	private float price;
-	public float getPrice()
-	{
+	private double price;
+	public double getPrice(){
 		return price; 
 	}
 	
@@ -72,12 +71,8 @@ public class ProductEntity extends BaseEntity<ProductEntity> {
 		return this.createdOn;
 	}
 
-	private float price;
-	public float getPrice() {
-		return this.price; //logic to round to 2 decimal places?)
-	}
 
-	private ProductEntity setPrice(float price){
+	private ProductEntity setPrice(double price){
 		if (this.price != price){
 			this.price = price;
 			this.propertyChanged(ProductFieldNames.PRICE);	
@@ -96,11 +91,13 @@ public class ProductEntity extends BaseEntity<ProductEntity> {
 			this.propertyChanged(ProductFieldNames.SALABLE);
 		}
 		return this;
+	}
 
 	public Product synchronize(Product apiProduct) {
 		this.setQuantity(apiProduct.getQuantity());
 		this.setLookupCode(apiProduct.getLookupCode());
-		this.set
+		this.setPrice(apiProduct.getPrice());
+		this.setSalable(apiProduct.getSalable());
 		apiProduct.setCreatedOn(this.createdOn);
 		
 		return apiProduct;

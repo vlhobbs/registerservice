@@ -11,7 +11,7 @@ import edu.uark.models.entities.TransactionEntity;
 public class Transaction {
 	
 	private UUID id;
-	public UUID getId() {
+	public UUID getRecordId() {
 		return this.id;
 	}
 	public Transaction setRecordId(UUID id) {
@@ -28,8 +28,8 @@ public class Transaction {
 		return this;
 	}
 
-	private float total;
-	public float getTotal(){
+	private double total;
+	public double getTotal(){
 		return this.total;
 	}
 	public Transaction setTotal (float total) {
@@ -70,15 +70,16 @@ public class Transaction {
 	}
 	public Transaction setApiRequestStatus(TransactionApiRequestStatus apiRequestStatus) {
 		if (this.apiRequestStatus != apiRequestStatus) {
-			this apiRequestStatus=apiRequestStatus;
+			this.apiRequestStatus = apiRequestStatus;
 		}
 		return this;
+	}
 
 	private String apiRequestMessage;
 	public String getApiRequestMessage() {
 		return this.apiRequestMessage;
 	}
-	public String setApiRequestMessage(String apiRequestMessage) {
+	public Transaction setApiRequestMessage(String apiRequestMessage) {
 		if (!StringUtils.equalsIgnoreCase(this.apiRequestMessage, apiRequestMessage)) {
 			this.apiRequestMessage = apiRequestMessage;
 		}
@@ -105,7 +106,7 @@ public class Transaction {
 		this.referenceId=transactionEntity.getReferenceId() ;
 		this.createdOn =transactionEntity.getCreatedOn();
 		this.apiRequestMessage=StringUtils.EMPTY;
-		this.apiRequestStatus=ProductApiRequestStatus.OK;
+		this.apiRequestStatus=TransactionApiRequestStatus.OK;
 	}
 
 

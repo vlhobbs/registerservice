@@ -6,8 +6,8 @@ import java.util.Map;
 public enum TransactionTypeClassification {
 	NOT_DEFINED(0),
 	SALE(1),
-	RETURN(2),
-	
+	RETURN(2);
+		
 	public int getValue() {
 		return value;
 	}

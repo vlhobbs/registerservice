@@ -14,21 +14,21 @@ public class ShoppingCart
 	  totalPrice = 0;
 	}
 
-	public ShoppingCart(TransactionEntity transaction){
+	//public ShoppingCart(TransactionEntity transaction){
 			
 	 
 	public void add(ProductEntity input, int quantity)
 	{
 		cart.add(input);
 		count += quantity;
-		totalPrice += (quantity * input.getCost());
+		totalPrice += (quantity * input.getPrice());
 	}
 	
 	public void remove(ProductEntity input, int quantity)
 	{
 		cart.remove(input);
 		count -= quantity; 
-		totalPrice -= (quantity * input.getCost()); 
+		totalPrice -= (quantity * input.getPrice()); 
 	}
 	
 	public int getTotalPrice()
